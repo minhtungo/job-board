@@ -27,8 +27,8 @@ const JobListItem: FC<JobListItemProps> = ({
       <Image
         src={companyLogoUrl || jobBoardLogo}
         alt={`${companyName} logo`}
-        width={100}
-        height={100}
+        width={80}
+        height={80}
         className="self self-center rounded-lg"
       />
       <div className="flex-grow space-y-3">

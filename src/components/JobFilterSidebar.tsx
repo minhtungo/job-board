@@ -5,11 +5,26 @@ import Select from "./ui/select";
 import prisma from "@/lib/prisma";
 import { jobTypes } from "@/lib/job-types";
 import { Button } from "./ui/button";
+import { jobFilterSchema } from "@/lib/validation";
+import { redirect } from "next/navigation";
 
 interface JobFilterSidebarProps {}
 
 async function filterJobs(formData: FormData) {
   "use server";
+
+  const values = Object.fromEntries(formData.entries());
+
+  const { q, type, location, remote } = jobFilterSchema.parse(values);
+
+  const searchParams = new URLSearchParams({
+    ...(q && { q: q.trim() }),
+    ...(type && { type }),
+    ...(location && { location }),
+    ...(remote && { remote: "true" }),
+  });
+
+  redirect(`/?${searchParams.toString()}`);
 }
 
 const JobFilterSidebar: FC<JobFilterSidebarProps> = async () => {
@@ -36,7 +51,7 @@ const JobFilterSidebar: FC<JobFilterSidebarProps> = async () => {
           <div className="flex flex-col gap-2">
             <Label htmlFor="type">Type</Label>
             <Select id="type" name="type" defaultValue="">
-              <option value="">All type</option>
+              <option value="">All types</option>
               {jobTypes.map((type) => (
                 <option value={type} key={type}>
                   {type}
