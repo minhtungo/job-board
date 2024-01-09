@@ -1,13 +1,12 @@
-import { FC } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import Select from "./ui/select";
-import prisma from "@/lib/prisma";
 import { jobTypes } from "@/lib/job-types";
-import { Button } from "./ui/button";
+import prisma from "@/lib/prisma";
 import { JobFilterValues, jobFilterSchema } from "@/lib/validation";
 import { redirect } from "next/navigation";
+import { FC } from "react";
 import FormSubmitButton from "./FormSubmitButton";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import Select from "./ui/select";
 
 interface JobFilterSidebarProps {
   defaultValues: JobFilterValues;
