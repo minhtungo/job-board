@@ -10,7 +10,7 @@
     "seed": "node scripts/seed.js"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.29.1",
+    "@clerk/nextjs": "^4.29.2",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.7.1",
     "@radix-ui/react-label": "^2.0.2",
