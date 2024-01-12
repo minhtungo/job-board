@@ -1,9 +1,9 @@
-import { FC, cache } from "react";
-import prisma from "@/lib/prisma";
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
 import JobDetails from "@/components/JobDetails";
 import { Button } from "@/components/ui/button";
+import prisma from "@/lib/prisma";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { FC, cache } from "react";
 
 interface PageProps {
   params: { slug: string };
@@ -27,6 +27,15 @@ export async function generateMetadata({
   return {
     title: job.title,
   };
+}
+
+export async function generateStaticParams() {
+  const jobs = await prisma.job.findMany({
+    where: { approved: true },
+    select: { slug: true },
+  });
+
+  return jobs.map(({ slug }) => slug);
 }
 
 const Page: FC<PageProps> = async ({ params: { slug } }) => {
